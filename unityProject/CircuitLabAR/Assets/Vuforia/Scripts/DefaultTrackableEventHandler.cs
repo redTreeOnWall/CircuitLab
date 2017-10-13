@@ -4,6 +4,7 @@ All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
+using state.GameClasses.Behiviors;
 using UnityEngine;
 
 namespace Vuforia
@@ -68,6 +69,7 @@ namespace Vuforia
 
         private void OnTrackingFound()
         {
+            GameBehivior.TrackFound = true;
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
@@ -89,6 +91,7 @@ namespace Vuforia
 
         private void OnTrackingLost()
         {
+            GameBehivior.TrackFound = false;
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 

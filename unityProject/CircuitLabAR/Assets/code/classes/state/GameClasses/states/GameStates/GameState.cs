@@ -22,17 +22,14 @@ namespace state.GameClasses.states.GameStates{
 
         public override void stateEnd()
         {
-            throw new NotImplementedException();
         }
 
         public override void stateInit()
         {
-            throw new NotImplementedException();
         }
         
         public override void stateUpdate()
         {
-            throw new NotImplementedException();
         }
     }
 }
