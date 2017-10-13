@@ -58,15 +58,16 @@ public class draw : MonoBehaviour
             //控制角度
             if (i == bones.Length - 1)
             {
+                var eler =-90 - Mathf.Atan2(bones[i].position.x - bones[i].position.x, bones[i - 1].position.z - bones[i].position.z);                
                 bones[i].eulerAngles = new Vector3(
                      bones[i].eulerAngles.x,
-                     Mathf.Atan2(bones[i].position.x - bones[i].position.x, bones[i - 1].position.z - bones[i].position.z),
-                     bones[i].eulerAngles.y
+                     eler,
+                     bones[i].eulerAngles.z
                 );
             }
             else
             {
-                var eler = Mathf.Atan2(bones[i + 1].position.x - bones[i].position.x, bones[i + 1].position.z - bones[i].position.z);
+                var eler = Mathf.Atan2(bones[i + 1].position.x - bones[i].position.x, bones[i ].position.z - bones[i].position.z);
                 eler =90+ eler*180/Mathf.PI;
                 bones[i].eulerAngles = new Vector3(
                      bones[i].eulerAngles.x,
