@@ -50,7 +50,7 @@ namespace state.GameClasses.Behiviors{
             InitGameSate = newState("InitGameSate");
             MainGameState = newState("MainGameState");
             ReFindingGameState = newState("ReFindingGameState");
-            thisState = MainGameState;
+            thisState = InitGameSate;
         }
         void Update()
         {

@@ -11,6 +11,10 @@ public class draw : MonoBehaviour
     //电流的代表对象以及位置；
     GameObject[] IPoints = new GameObject[3];
 
+    //电流速度
+    public float iSpeed;
+    
+
     //导线的线段上的所有节点的位置
     public Vector3[] linePoints = new Vector3[31];
     //绑定了骨骼的网格
@@ -50,36 +54,48 @@ public class draw : MonoBehaviour
             bones[i] = LineMesh.transform.Find("b" + num);
 
         }
+
+            //控制骨骼的位置
         for (int i = 0; i < bones.Length; i++)
         {
-            //控制骨骼的位置
+            
             bones[i].transform.position = linePoints[i];
+
+        }
+        for (int i = 0; i < bones.Length; i++)
+        {
 
             //控制角度
             if (i == bones.Length - 1)
             {
-                var eler =-90 - Mathf.Atan2(bones[i].position.x - bones[i].position.x, bones[i - 1].position.z - bones[i].position.z);                
+                  
+                float eler = Mathf.Atan2(bones[i].position.z - bones[i - 1].position.z, bones[i].position.x - bones[i - 1].position.x);
+                eler =180- eler * 180 / Mathf.PI;
                 bones[i].eulerAngles = new Vector3(
                      bones[i].eulerAngles.x,
                      eler,
                      bones[i].eulerAngles.z
                 );
+                
             }
             else
             {
-                var eler = Mathf.Atan2(bones[i + 1].position.x - bones[i].position.x, bones[i ].position.z - bones[i].position.z);
-                eler =90+ eler*180/Mathf.PI;
+                float eler3 = Mathf.Atan2(bones[i + 1].position.z - bones[i].position.z,  bones[i +1].position.x - bones[i].position.x);
+                Debug.Log("----------------");
+                Debug.Log("eler front:" + eler3);
+                eler3 =180- eler3 * 180 / Mathf.PI;
+                Debug.Log("eler back:" + eler3);
                 bones[i].eulerAngles = new Vector3(
                      bones[i].eulerAngles.x,
-                     eler,
+                     eler3,
                      bones[i].eulerAngles.z
                 );
-                Debug.Log(bones[i].eulerAngles.y);
-                Debug.Log("eler:"+eler);
             }
+            if(i==6){
+                Debug.Log("========================i6y:"+bones[i].eulerAngles.y);
+            }
+            Debug.Log(bones[i].eulerAngles.y);
         }
-
-
 
 
         //初始化
@@ -100,7 +116,7 @@ public class draw : MonoBehaviour
         }
         line.SetVertexCount(vs.Length);
         line.SetPositions(vs);
-        Debug.Log(line.positionCount);
+        //       Debug.Log(line.positionCount);
 
         //创建电流点数组
         for (int i = 0; i < IPoints.Length; i++)
@@ -118,7 +134,6 @@ public class draw : MonoBehaviour
         }
     }
 
-    // Update is called once per frame  
     float flowI = 0;
     void Update()
     {
